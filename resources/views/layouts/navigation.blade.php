@@ -1,19 +1,45 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+   {{-- <div class="w-full h-[100px] overflow-hidden">
+    <a href="/dashboard"><img src="{{ asset('images/coba.png') }}" alt="Header" class="w-full h-full object-cover"></a>
+</div> --}}
+
+<nav x-data="{ open: false }" class="bg-white ">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-20">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <img src="{{ asset('images/logo_3.jpg') }}" alt="Logo" class="h-[60px] w-auto">
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link href="/volunteer" :active="request()->is('volunteer')">
+                        {{('Volunteer') }}
+                     </x-nav-link>
+
+                    <x-nav-link href="/perlombaan" :active="request()->is('perlombaan')">
+                        {{('Perlombaan') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="/magang" :active="request()->is('magang')">
+                        {{ ('Tempat Magang') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="/kampus" :active="request()->is('kampus')">
+                        {{ ('Event Internal') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="/lainya" :active="request()->is('lainya')">
+                        {{ ('Lainya') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="/bookmark" :active="request()->is('bookmark')">
+                        {{('Bookmark') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -35,7 +61,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{('Profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -45,7 +71,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -63,13 +89,54 @@
             </div>
         </div>
     </div>
-
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+ <div 
+    x-show="open" 
+    x-transition:enter="transition transform ease-out duration-300"
+    x-transition:enter-start="translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition transform ease-in duration-300"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="translate-x-full"
+    class="fixed top-0 right-0 w-64 h-full bg-white z-50 shadow-lg sm:hidden"
+    @click.away="open = false">
+
+   <!-- Tombol Close (X) -->
+    <div class="flex justify-left p-4">
+        <button @click="open = false" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{('Dashboard') }}
             </x-responsive-nav-link>
+              <x-responsive-nav-link href="/volunteer" :active="request()->is('volunteer')">
+        {{('Volunteer') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="/perlombaan" :active="request()->is('perlombaan')">
+        {{('Perlombaan') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="/magang" :active="request()->is('magang')">
+        {{('Tempat Magang') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="/kampus" :active="request()->is('kampus')">
+        {{('Event Internal') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="/lainya" :active="request()->is('lainya')">
+        {{('Lainnya') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link href="/bookmark" :active="request()->is('bookmark')">
+        {{('Bookmark') }}
+    </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -81,7 +148,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{('Profile') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -91,7 +158,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
